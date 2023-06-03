@@ -2,18 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    newPembelian,
+    createPembelian,
     editPembelian,
-    deletePembelian
+    deletePembelian,
+    findPembelian
 } = require('../controller/pembelian')
 
 router.route('/')
   .get(findPembelian)
-  .post(newPembelian);
+  .post(createPembelian);
 
 router
   .route('/:id')
   .patch(editPembelian)
-  .delete(deletePembelian)
+  .delete(deletePembelian);
 
 module.exports = router;

@@ -2,17 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    newPenjualan,
+    createPenjualan,
+    findPenjualan,
     editPenjualan,
     deletePenjualan
 } = require('../controller/penjualan')
 
 router.route('/')
   .get(findPenjualan)
-  .post(newPenjualan);
+  .post(createPenjualan);
 
 router
   .route('/:id')
+  .get(findPenjualan)
   .patch(editPenjualan)
   .delete(deletePenjualan)
 

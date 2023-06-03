@@ -1,5 +1,5 @@
-const User = require ('../models/user')
-const Penjualan = require ('../models/penjualan.js')
+const User = require ('../model/user')
+const Penjualan = require ('../model/penjualan')
 
 // exports.find = async (req, res, next){}
 
@@ -47,13 +47,13 @@ exports.deletePenjualan = async (req, res, next) => {
 exports.findPenjualan = async (req, res, next) => {
     try {
         
-        if (req.query.id){
-            const id = req.query.id;
+        if (req.params.id){
+            const _id = req.params.id;
 
-            Penjualan.findById(id)
+            Penjualan.findById(_id)
                 .then(data => {
                     if(!data){
-                        res.status(404).send({message: "Tidak ditemukan transaksi dengan id " + id})
+                        res.status(404).send({message: "Tidak ditemukan transaksi dengan id " + _id})
                     }
                     else {
                         res.status(200).json(data);
@@ -73,7 +73,7 @@ exports.findPenjualan = async (req, res, next) => {
         }
     }
     catch{
-
+      next(err)
     }
 }
 

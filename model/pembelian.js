@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserSchema = mongoose.Schema({
+const BeliSchema = mongoose.Schema({
   tgl_beli: {
     type: Date,
     required: true,

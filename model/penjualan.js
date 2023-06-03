@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserSchema = mongoose.Schema({
+const JualSchema = mongoose.Schema({
   tgl_jual: {
     type: Date,
     required: true,

@@ -1,30 +1,42 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
-const userRoutes = require('./routes/user');
-const beliRoutes = require('./routes/pembelian');
-const jualRoutes = require('./routes/penjualan');
-const authRoutes = require('./routes/auth');
+const cors = require('cors');
+const path = require('path');
+const dotenv = require('dotenv');
 
+const userRoutes = require('./route/user');
+const beliRoutes = require('./route/pembelian');
+const jualRoutes = require('./route/penjualan');
+const authRoutes = require('./route/auth');
+
+dotenv.config( { path : 'config.env'} )
+
+// server
 const app = express();
+
+const corsConfig = {
+  credentials: true,
+  origin: process.env.ORIGIN_FE,
+};
+
+app.use(cors(corsConfig));
 
 app.set('view engine', 'ejs')
 
+app.use(bodyParser.urlencoded({ extended : true}));
+// app.use('/', express.static('public'));
+
 const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || '3000';
-
-
-app.use(bodyparser.urlencoded({ extended : true}));
-app.use('/', require('./routes/'));
-
-mongoose.connect("mongodb://localhost:27017/");
+const PORT = process.env.SERVER_PORT || '3000';
 
 app.get("/", function(req, res) {
-    res.render('./services/')
+    res.send("Haloooo")
+    // res.render('./services/')
 });
 
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', process.env.origin_fe);
+    res.setHeader('Access-Control-Allow-Origin', process.env.ORIGIN_FE);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -32,20 +44,20 @@ app.use(function (req, res, next) {
   });
 
 app
-  .use("/user", userRoutes)
-  .use("/user", authRoutes)
-  .use("/penjualan", jualRoutes)
-  .use("/pembelian", beliRoutes)
+  .use("/api/user", userRoutes)
+  // .use("/user", authRoutes)
+  .use("/api/penjualan", jualRoutes)
+  .use("/api/pembelian", beliRoutes)
   .get("/", (req, res) => res.send("Welcome to the API!"))
   .all("*", (req, res) => res.send("You've tried reaching a route that doesn't exist."))
 
-//dB
+// connect to DB
 mongoose
-  .connect(process.env.dB_connection) 
-  .then(console.log("Connected to database"))
-  .catch((error) => console.error(error))
+  .connect(process.env.MONGO_URI)
+  .then(console.log("Connected to Database"))
+  .catch((err) => console.error(err));
 
 //Server / URL
-app.listen(process.env.PORT, () => 
+app.listen(PORT, () =>
   console.log(`Server running on port: http://${HOST}:${PORT}`)
 )
