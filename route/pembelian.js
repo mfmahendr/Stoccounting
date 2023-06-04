@@ -14,6 +14,7 @@ router.route('/')
 
 router
   .route('/:id')
+  .get(findPembelian)
   .patch(editPembelian)
   .delete(deletePembelian);
 

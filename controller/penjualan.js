@@ -37,7 +37,7 @@ exports.editPenjualan = async (req, res, next) => {
 
 exports.deletePenjualan = async (req, res, next) => { 
     try {
-      const removedPenjualan = await Penjualan.remove({ _id : req.params.id })
+      const removedPenjualan = await Penjualan.deleteOne({ _id : req.params.id })
       res.status(200).json(removedPenjualan)
     } catch(err) {
       next(err)

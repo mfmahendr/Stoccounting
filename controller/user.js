@@ -1,6 +1,26 @@
 const User = require ('../model/user')
 
 /*
+Create New User Data to Database
+Path Name: server/users/
+*/
+exports.createUser = async (req, res, next) => {
+  try {
+    const user = new User({
+      username: req.body.username,
+      password: req.body.password,
+    })
+    const savedUser = await user.save()
+    res
+      .status(200)
+      .json(savedUser)
+  } catch(err) {
+    next(err)
+  }
+}
+
+
+/*
 Get All User Data from Database
 Path Name: server/users/
 */

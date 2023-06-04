@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 const userRoutes = require('./route/user');
 const beliRoutes = require('./route/pembelian');
 const jualRoutes = require('./route/penjualan');
+const pelaporanRoutes = require('./route/pelaporan');
 const authRoutes = require('./route/auth');
 
 dotenv.config( { path : 'config.env'} )
@@ -30,11 +31,6 @@ app.use(bodyParser.urlencoded({ extended : true}));
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.SERVER_PORT || '3000';
 
-app.get("/", function(req, res) {
-    res.send("Haloooo")
-    // res.render('./services/')
-});
-
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', process.env.ORIGIN_FE);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -48,6 +44,7 @@ app
   // .use("/user", authRoutes)
   .use("/api/penjualan", jualRoutes)
   .use("/api/pembelian", beliRoutes)
+  .use("/api", pelaporanRoutes)
   .get("/", (req, res) => res.send("Welcome to the API!"))
   .all("*", (req, res) => res.send("You've tried reaching a route that doesn't exist."))
 
