@@ -40,7 +40,7 @@ check more about frontend side [here][frontend-side]
 ## Output Structure
 
 ```shell
-backend-kelompok4/
+backend-kelompok21/
 ├── controller/
 |   ├── pelaporan.js
 |   ├── pembelian.js
