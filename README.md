@@ -1,5 +1,5 @@
 # Stoccounting
-Aplikasi ini merupakan aplikasi sistem manajemen keuangan stok barang dagang dan digunakan untuk melakukan pemantauan keuangan terkait pembelian dan penjualan stok barang (akuntansi perusahaan dagang).
+Aplikasi ini merupakan aplikasi sistem manajemen keuangan stok barang dagang dan digunakan untuk melakukan pemantauan keuangan terkait pembelian dan penjualan stok barang (akuntansi perusahaan dagang). Aplikasi ini akan memantau arus kas dan keuangan bisnis terkait dengan pembelian dan penjualan stok barang. Setelah itu, aplikasi ini dapat menghasilkan laporan keuangan (seperti laporan neraca, laporan rugi-laba, dan laporan arus kas) serta visualisasi  yang dapat membantu bisnis dalam memantau kesehatan keuangan dan pengelolaan stok barang.
 
 
 <!-- markdownlint-configure-file {
@@ -17,14 +17,14 @@ Aplikasi ini merupakan aplikasi sistem manajemen keuangan stok barang dagang dan
 
 this is backend side of Stoccounting API
 
-A To do list Web App, created for Pemrograman Aplikasi Web class <br/>
+An Inventory Financial System Web App, created for Integrasi Aplikasi dan Informasi class <br/>
 check more about frontend side [here][frontend-side]
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
-[Author](#author-(kelompok-21)) •
+[Author](#author-[kelompok-21]) •
 [Output Structure](#output-structure) •
 [Prerequisites](#prerequisites) •
 [Getting Started](#getting-started) •
@@ -42,22 +42,24 @@ check more about frontend side [here][frontend-side]
 ```shell
 backend-kelompok4/
 ├── controller/
-|   ├── activity.js
+|   ├── pelaporan.js
+|   ├── pembelian.js
+|   ├── penjualan.js
 |   ├── auth.js
 |   └── user.js
-├── middleware/
-|   ├── authMiddleware
-|   └── errorHandler
 ├── models/
-|   ├── activity.js
+|   ├── pembelian.js
+|   ├── penjualan.js
 |   └── user.js
 ├── routes/
-|   ├── activity.js
+|   ├── pembelian.js
+|   ├── penjualan.js
+|   ├── pelaporan.js
+|   ├── index.js
 |   ├── auth.js
 |   └── user.js
-├── utils/
-|   ├── errorResponse.js
-|   └── validate.js
+├── .gitignore
+├── README.MD
 ├── index.js
 ├── package.json
 ├── package-lock.json
@@ -98,8 +100,10 @@ Setting up project for local usage.
     ```
 3. Make config.env file in root folder<br/>
     ```shell
-    dB_connection = "your mongo string connection"
-    PORT = "port to run in localhost"
+    MONGO_URI: "mongodb+srv://iai-kelompok6:stockmasterkel6@cluster0.kdsxc.mongodb.net/?retryWrites=true&w=majority"
+    ORIGIN_FE: "URL asal (origin) yang diizinkan untuk mengakses aplikasi server Anda".
+    HOST (opsional): "Host yang akan digunakan oleh server". Jika tidak disetel, server akan menggunakan nilai default 'localhost'.
+    SERVER_PORT (opsional): "Port yang akan digunakan oleh server". Jika tidak disetel, server akan menggunakan nilai default '3000'.
     ```
 4. Run the program
     ```shell
